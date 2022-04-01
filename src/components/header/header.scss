@@ -1,0 +1,30 @@
+.header {
+   margin: 50px 0 50px 0;
+   /* .header__title */
+   &__title {
+      font-size: 28px;
+      font-weight: 700;
+      span {
+         color: #9f0013;
+      }
+   }
+   /* .header__menu */
+   &__menu {
+      font-size: 24px;
+   }
+   /* .header__wrapper */
+   &__wrapper {
+      display: flex;
+      justify-content: space-between;
+   }
+   /* .header__btn */
+   &__btn {
+      font-weight: 700;
+      font-family: "Roboto Condensed", sans-serif;
+      &.active {
+         color: #9f0013;
+      }
+   }
+}
+.container {
+}
