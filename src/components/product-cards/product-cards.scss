@@ -1,0 +1,35 @@
+.product {
+   /* .product__cards */
+   &__cards {
+      position: relative;
+   }
+   /* .product__cards-wrapper */
+   &__cards-wrapper {
+      display: flex;
+   }
+}
+
+.cards {
+   /* .cards__body */
+   &__body {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-right: 25px;
+   }
+   /* .cards__body-btn */
+   &__body-btn {
+      width: 100%;
+      text-align: center;
+      margin-top: 15px;
+   }
+}
+
+.main {
+   /* .main__bg */
+   &__bg {
+      position: absolute;
+      bottom: 0;
+      right: 12%;
+   }
+}

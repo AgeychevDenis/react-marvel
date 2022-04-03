@@ -18,7 +18,7 @@ body {
   background-color: #fff;
   line-height: 1;
   color: #000;
-  font-weight: 600;
+  font-weight: 400;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -64,4 +64,74 @@ h6 {
   margin: 0 auto;
   max-width: 1140px;
   padding: 0 20px;
+}
+
+.btn {
+  width: 100px;
+  height: 40px;
+  line-height: 16px;
+  color: #fff;
+  background-color: #9f0013;
+  position: relative;
+  font-family: "Roboto Condensed", sans-serif;
+  transition: opacity 0.3s;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:nth-of-type(2) {
+    background-color: #5c5c5c;
+  }
+  &::before {
+    border-style: solid;
+    border-width: 0 0 16px 16px;
+    box-sizing: border-box;
+    content: "";
+    top: 0;
+    display: block;
+    position: absolute;
+    border-color: #fff #00000000;
+    transform: rotate(180deg);
+  }
+  &::after {
+    border-style: solid;
+    border-width: 0 0 16px 16px;
+    box-sizing: border-box;
+    content: "";
+    bottom: 0;
+    right: 0;
+    display: block;
+    position: absolute;
+    border-color: #fff #00000000;
+  }
+  & + & {
+    margin-left: 30px;
+  }
+}
+
+.mod-btn {
+  font-size: 14px;
+  margin-top: 22px;
+  &::before,
+  &::after {
+    border-color: #232222 #00000000;
+  }
+}
+
+.mod-btn__width {
+  width: 170px;
+}
+
+.product {
+  /* .product__cards */
+  &__cards {
+  }
+  /* .product__cards-inner */
+  &__cards-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 675px;
+    margin-right: 25px;
+  }
 }
