@@ -7,6 +7,10 @@
    /* .card__img */
    &__img {
       margin-bottom: 15px;
+      width: 200px;
+      img {
+         width: 100%;
+      }
    }
    /* .card__title */
    &__title {
@@ -15,6 +19,7 @@
       color: #fff;
       line-height: 26px;
       margin: 0 15px;
+      text-transform: uppercase;
    }
    &.active {
       box-shadow: 0px 5px 20px #9f0013;

@@ -8,7 +8,7 @@ import './product-cards.scss';
 
 class ProductCards extends Component {
    state = {
-      char: []
+      charList: []
    }
 
    componentDidMount() {
@@ -18,8 +18,8 @@ class ProductCards extends Component {
    marvelService = new MarvelService();
 
 
-   onCharLoaded = (char) => {
-      this.setState({ char })
+   onCharLoaded = (charList) => {
+      this.setState({ charList })
    }
 
    updateChar = () => {
@@ -29,15 +29,19 @@ class ProductCards extends Component {
    }
 
    render() {
-      const { char } = this.state;
-      char.forEach(item => console.log(item))
+      const { charList } = this.state;
+      const elements = charList.map(elem => {
+         return (
+            <Card {...elem} />
+         )
+      })
 
       return (
          <div className="product__cards" >
             <div className="container">
                <div className="product__cards-wrapper">
                   <div className="cards__body">
-                     <Card />
+                     {elements}
                      <div className="cards__body-btn">
                         <button className="btn mod-btn__width">LOAD MORE</button>
                      </div>
