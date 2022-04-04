@@ -1,15 +1,16 @@
-import React from 'react';
-import CardImg from '../../assets/img/card/item.jpg';
+// import { Component } from 'react';
+// import CardImg from '../../assets/img/card/item.jpg';
 import './card.scss';
 
-function Card() {
+const Card = ({ name, thumbnail }) => {
+
    return (
-      <div className='card'>
+      <div className='card' >
          <div className="card__img">
-            <img src={CardImg} alt="hero" />
+            <img src={thumbnail} alt="hero" />
          </div>
          <h3 className="card__title">
-            ABYSS
+            {name}
          </h3>
       </div>
    )

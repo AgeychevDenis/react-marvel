@@ -1,51 +1,59 @@
 import Decoration from '../../assets/img/info/Decoration.png';
 import { React, Component } from 'react';
-import MarvelService from '../../services/marvel-service'
+import MarvelService from '../../services/marvel-service';
+import ErrorMessage from '../error-message/error-message';
+import Spinner from '../spinner/spinner';
 import './info.scss';
 
 class Info extends Component {
-   constructor(props) {
-      super(props);
-      this.updateChar();
-   }
-
    state = {
-      char: {}
+      char: {},
+      loading: true,
+      error: false
    }
 
    marvelService = new MarvelService();
 
-   onChatLoaded = (char) => {
-      this.setState({ char })
+   componentDidMount() {
+      this.updateChar();
+   }
+
+   onCharLoaded = (char) => {
+      this.setState({
+         char,
+         loading: false
+      })
+   }
+
+   onError = () => {
+      this.setState({
+         loading: false,
+         error: true
+      })
    }
 
    updateChar = () => {
       const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
       this.marvelService
          .getCharacter(id)
-         .then(this.onChatLoaded)
+         .then(this.onCharLoaded)
+         .catch(this.onError);
    }
 
    render() {
-      const { char: { name, description, thumbnail, homepage, wiki } } = this.state;
+      const { char, loading, error } = this.state;
+      const errorMessage = error ? <ErrorMessage /> : null;
+      const spinner = loading ? <Spinner /> : null;
+      const content = !(loading || error) ? <View char={char} /> : null;
+
       return (
          <div className='info' >
             <div className="container">
                <div className="info__page">
                   <div className="info__block block-info">
-                     <div className="block-info__img">
-                        <img src={thumbnail} alt="Thumbnail" />
-                     </div>
-                     <div className="block-info__inner">
-                        <h4 className="block-info__title">{name}</h4>
-                        <p className="block-info__subtitle">
-                           {description === '' ? "no text" : description}
-                        </p>
-                        <div className="block-info__buttons">
-                           <a href={homepage} className="block-info__link btn">HOMEPAGE</a>
-                           <a href={wiki} className="block-info__link btn">WIKI</a>
-                        </div>
-                     </div>
+                     {errorMessage}
+                     {spinner}
+                     {content}
                   </div>
                   <div className="info__block block-info">
                      <div className="block-info__wrapper">
@@ -65,6 +73,28 @@ class Info extends Component {
          </div>
       )
    }
+}
+
+const View = ({ char }) => {
+   const { name, description, thumbnail, homepage, wiki } = char;
+
+   return (
+      <>
+         <div className="block-info__img">
+            <img src={thumbnail} alt="Thumbnail" />
+         </div>
+         <div className="block-info__inner">
+            <h4 className="block-info__title">{name}</h4>
+            <p className="block-info__subtitle">
+               {description}
+            </p>
+            <div className="block-info__buttons">
+               <a href={homepage} className="block-info__link btn">HOMEPAGE</a>
+               <a href={wiki} className="block-info__link btn">WIKI</a>
+            </div>
+         </div>
+      </>
+   )
 }
 
 export default Info;
