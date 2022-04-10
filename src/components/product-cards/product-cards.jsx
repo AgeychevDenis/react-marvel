@@ -1,55 +1,109 @@
 import { Component } from 'react';
 import MarvelService from '../../services/marvel-service';
-import Card from '../card/card';
-import CardsAside from '../cards-aside/cards-aside';
+import ErrorMessage from '../error-message/error-message';
+import Spinner from '../spinner/spinner';
 
-import ImgBg from '../../assets/img/bg/bg.png'
+
 import './product-cards.scss';
 
 class ProductCards extends Component {
    state = {
-      charList: []
-   }
-
-   componentDidMount() {
-      this.updateChar();
+      charList: [],
+      loading: true,
+      error: false,
+      newItemLoading: false,
+      offset: 210,
+      charEnded: false
    }
 
    marvelService = new MarvelService();
 
-
-   onCharLoaded = (charList) => {
-      this.setState({ charList })
+   componentDidMount() {
+      this.onRequest();
    }
 
-   updateChar = () => {
-      this.marvelService
-         .getAllCharacters()
-         .then(this.onCharLoaded)
+   onRequest = (offset) => {
+      this.onCharListLoading()
+      this.marvelService.getAllCharacters(offset)
+         .then(this.onCharListLoaded)
+         .catch(this.onError)
+   }
+
+   onCharListLoading = () => {
+      this.setState({
+         newItemLoading: true
+      })
+   }
+
+   onCharListLoaded = (newCharList) => {
+      let ended = false;
+      if (newCharList.length < 9) {
+         ended = true;
+      }
+
+      this.setState(({ offset, charList }) => ({
+         charList: [...charList, ...newCharList],
+         loading: false,
+         newItemLoading: false,
+         offset: offset + 9,
+         charEnded: ended
+      }))
+   }
+
+   onError = () => {
+      this.setState({
+         error: true,
+         loading: false
+      })
+   }
+
+   renderItems(arr) {
+      const items = arr.map((item) => {
+
+         return (
+            <div className='card'
+               key={item.id}
+               onClick={() => this.props.onCharSelected(item.id)}
+            >
+               <div className="card__img">
+                  <img src={item.thumbnail} alt="hero" />
+               </div>
+               <h3 className="card__title">
+                  {item.name}
+               </h3>
+            </div>
+         )
+      });
+      return (
+         <div className="cards__body">
+            {items}
+         </div>
+      )
    }
 
    render() {
-      const { charList } = this.state;
-      const elements = charList.map(elem => {
-         return (
-            <Card {...elem} />
-         )
-      })
+      const { charList, loading, error, newItemLoading, offset, charEnded } = this.state;
+
+      const items = this.renderItems(charList);
+      const errorMessage = error ? <ErrorMessage /> : null;
+      const spinner = loading ? <Spinner /> : null;
+      const content = !(loading || error) ? items : null;
+
 
       return (
-         <div className="product__cards" >
-            <div className="container">
-               <div className="product__cards-wrapper">
-                  <div className="cards__body">
-                     {elements}
-                     <div className="cards__body-btn">
-                        <button className="btn mod-btn__width">LOAD MORE</button>
-                     </div>
-                  </div>
-                  <CardsAside />
-               </div>
+
+         <div className="product__cards-list">
+            {errorMessage}
+            {spinner}
+            {content}
+            <div className="cards__body-btn">
+               <button
+                  disabled={newItemLoading}
+                  style={{ 'display': charEnded ? 'none' : 'inline-block' }}
+                  onClick={() => this.onRequest(offset)}
+                  className="btn mod-btn__width">LOAD MORE
+               </button>
             </div>
-            <img className='main__bg' src={ImgBg} alt="bg" />
          </div>
       )
    }

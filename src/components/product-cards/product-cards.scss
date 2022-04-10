@@ -21,7 +21,7 @@
    &__body-btn {
       width: 100%;
       text-align: center;
-      margin-top: 15px;
+      margin: 15px auto 40px auto;
    }
 }
 
@@ -31,5 +31,34 @@
       position: absolute;
       bottom: 0;
       right: 12%;
+   }
+}
+
+.card {
+   width: 200px;
+   min-height: 318px;
+   background-color: #232222;
+   box-shadow: 5px 5px 10px 0px #00000040;
+   margin-bottom: 30px;
+   cursor: pointer;
+   /* .card__img */
+   &__img {
+      margin-bottom: 15px;
+      overflow: hidden;
+      img {
+         height: 200px;
+      }
+   }
+   /* .card__title */
+   &__title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+      line-height: 26px;
+      margin: 0 15px;
+      text-transform: uppercase;
+   }
+   &.active {
+      box-shadow: 0px 5px 20px #9f0013;
    }
 }

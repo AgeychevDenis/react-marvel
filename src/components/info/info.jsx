@@ -25,6 +25,12 @@ class Info extends Component {
       })
    }
 
+   onCharLoading = () => {
+      this.setState({
+         loading: true
+      })
+   }
+
    onError = () => {
       this.setState({
          loading: false,
@@ -34,6 +40,7 @@ class Info extends Component {
 
    updateChar = () => {
       const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
+      this.onCharLoading();
       this.marvelService
          .getCharacter(id)
          .then(this.onCharLoaded)
@@ -64,7 +71,7 @@ class Info extends Component {
                         <p className="block-info__text">
                            Or choose another one
                         </p>
-                        <button className="btn mod-btn">TRY IT</button>
+                        <button onClick={this.updateChar} className="btn mod-btn">TRY IT</button>
                      </div>
                      <img className='block-info__img-decor' src={Decoration} alt="Decoration" />
                   </div>
@@ -77,11 +84,16 @@ class Info extends Component {
 
 const View = ({ char }) => {
    const { name, description, thumbnail, homepage, wiki } = char;
+   let imgSlyle = { 'objectFit': 'cover' }
+   const imgUrl = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg";
+   if (thumbnail === imgUrl) {
+      imgSlyle = { 'objectFit': 'contain' }
+   }
 
    return (
       <>
          <div className="block-info__img">
-            <img src={thumbnail} alt="Thumbnail" />
+            <img src={thumbnail} alt="Thumbnail" style={imgSlyle} />
          </div>
          <div className="block-info__inner">
             <h4 className="block-info__title">{name}</h4>
