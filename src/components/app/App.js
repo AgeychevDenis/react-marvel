@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import Header from '../header/header';
 import Info from '../info/info';
 import ProductCards from '../product-cards/product-cards';
@@ -43,7 +44,6 @@ class App extends Component {
       </div >
     );
   }
-
 }
 
 export default App;

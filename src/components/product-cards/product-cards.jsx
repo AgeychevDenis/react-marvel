@@ -1,7 +1,10 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import Spinner from '../spinner/spinner';
 import MarvelService from '../../services/marvel-service';
 import ErrorMessage from '../error-message/error-message';
-import Spinner from '../spinner/spinner';
+
 
 
 import './product-cards.scss';
@@ -107,6 +110,10 @@ class ProductCards extends Component {
          </div>
       )
    }
+}
+
+ProductCards.propTypes = {
+   onCharSelected: PropTypes.func.isRequired
 }
 
 export default ProductCards;
