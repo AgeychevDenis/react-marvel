@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import Spinner from '../spinner/spinner';
 import MarvelService from '../../services/marvel-service';
@@ -60,13 +61,29 @@ class ProductCards extends Component {
       })
    }
 
+   itemRefs = [];
+
+   setRef = (ref) => {
+      this.itemRefs.push(ref);
+   }
+
+   focusOnItem = (id) => {
+      this.itemRefs.forEach(item => item.classList.remove('card_selected'));
+      this.itemRefs[id].classList.add('card_selected');
+      this.itemRefs[id].focus();
+   }
+
    renderItems(arr) {
-      const items = arr.map((item) => {
+      const items = arr.map((item, i) => {
 
          return (
             <div className='card'
                key={item.id}
-               onClick={() => this.props.onCharSelected(item.id)}
+               ref={this.setRef}
+               onClick={() => {
+                  this.props.onCharSelected(item.id);
+                  this.focusOnItem(i);
+               }}
             >
                <div className="card__img">
                   <img src={item.thumbnail} alt="hero" />

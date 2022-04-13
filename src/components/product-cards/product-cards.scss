@@ -41,6 +41,7 @@
    box-shadow: 5px 5px 10px 0px #00000040;
    margin-bottom: 30px;
    cursor: pointer;
+   z-index: 5;
    /* .card__img */
    &__img {
       margin-bottom: 15px;
@@ -58,7 +59,7 @@
       margin: 0 15px;
       text-transform: uppercase;
    }
-   &.active {
+   &_selected {
       box-shadow: 0px 5px 20px #9f0013;
    }
 }
