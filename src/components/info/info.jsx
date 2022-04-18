@@ -1,16 +1,14 @@
 import Decoration from '../../assets/img/info/Decoration.png';
 import { useState, useEffect } from 'react';
-import MarvelService from '../../services/marvel-service';
+import useMarvelService from '../../services/marvel-service';
 import ErrorMessage from '../error-message/error-message';
 import Spinner from '../spinner/spinner';
 import './info.scss';
 
 const Info = () => {
    const [char, setChar] = useState({});
-   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(false);
 
-   const marvelService = new MarvelService();
+   const { loading, error, getCharacter, clearError } = useMarvelService();
 
    useEffect(() => {
       updateChar()
@@ -18,25 +16,13 @@ const Info = () => {
 
    const onCharLoaded = (char) => {
       setChar(char);
-      setLoading(false);
-   }
-
-   const onCharLoading = () => {
-      setLoading(true);
-   }
-
-   const onError = () => {
-      setError(true);
-      setLoading(false);
    }
 
    const updateChar = () => {
+      clearError();
       const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-      onCharLoading();
-      marvelService
-         .getCharacter(id)
-         .then(onCharLoaded)
-         .catch(onError);
+      getCharacter(id)
+         .then(onCharLoaded);
    }
 
    const errorMessage = error ? <ErrorMessage /> : null;
