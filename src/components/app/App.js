@@ -6,7 +6,8 @@ import ProductCards from '../product-cards/product-cards';
 import CardsAside from '../cards-aside/cards-aside';
 import ErrorBoundary from '../error-boundary/error-boundary';
 
-import ImgBg from '../../assets/img/bg/bg.png'
+// import ImgBg from '../../assets/img/bg/bg.png'
+import ComicsList from '../comics-list/comics-list';
 import './App.scss';
 
 
@@ -21,7 +22,7 @@ const App = () => {
   return (
     <div className="app" >
       <Header />
-      <ErrorBoundary>
+      {/* <ErrorBoundary>
         <Info />
       </ErrorBoundary>
       <div className="product__cards" >
@@ -36,7 +37,8 @@ const App = () => {
           </div>
         </div >
       </div >
-      <img className='main__bg' src={ImgBg} alt="bg" />
+      <img className='main__bg' src={ImgBg} alt="bg" /> */}
+      <ComicsList />
     </div >
   );
 
