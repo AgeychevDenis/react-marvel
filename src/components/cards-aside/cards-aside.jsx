@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types'
+
 import useMarvelService from '../../services/marvel-service';
 import Spinner from '../spinner/spinner';
 import ErrorMessage from '../error-message/error-message';
 import Skeleton from '../skeleton/skeleton'
-import PropTypes from 'prop-types'
 
 import './cards-aside.scss'
 
