@@ -55,6 +55,3 @@ const useMarvelService = () => {
 }
 
 export default useMarvelService;
-
-
-// const _apiKey = 'apikey=d4e215a4239d8b42eba7a5da558a9128';

@@ -61,14 +61,14 @@ const ComicsList = () => {
    const spinner = loading && !newItemLoading ? <Spinner /> : null;
 
    return (
-      <div className="comics__list">
+      <div className="comics__list container">
          {errorMessage}
          {spinner}
          {items}
          <button
             disabled={newItemLoading}
             style={{ 'display': comicsEnded ? 'none' : 'block' }}
-            className="button button__main button__long"
+            className="btn button__main button__long"
             onClick={() => onRequest(offset)}>
             <div className="inner">load more</div>
          </button>

@@ -1,4 +1,4 @@
-import React from 'react'
+import { Link, NavLink } from 'react-router-dom';
 import './header.scss';
 
 function Header() {
@@ -6,16 +6,32 @@ function Header() {
       <header className='header'>
          <div className="container">
             <div className="header__wrapper">
-               <h1 className="header__title"><span>Marvel</span> information portal</h1>
+               <h1 className="header__title">
+                  <Link to="/">
+                     <span>Marvel</span> information portal
+                  </Link>
+               </h1>
                <div className="header__menu">
-                  <button className="header__btn active">Characters</button>
+                  <NavLink
+                     end
+                     style={({ isActive }) => ({ 'color': isActive ? '#9f0013' : 'inherit' })}
+                     to="/"
+                     className="header__btn">
+                     Characters
+                  </NavLink>
                   <span>/</span>
-                  <button className="header__btn">Comics</button>
+                  <NavLink
+                     end
+                     style={({ isActive }) => ({ 'color': isActive ? '#9f0013' : 'inherit' })}
+                     to="/comics"
+                     className="header__btn">
+                     Comics
+                  </NavLink>
                </div>
             </div>
-         </div>
-      </header>
+         </div >
+      </header >
    )
 }
 
-export default Header
+export default Header;

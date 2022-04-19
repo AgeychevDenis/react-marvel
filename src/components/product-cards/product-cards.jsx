@@ -76,6 +76,8 @@ const ProductCards = (props) => {
       )
    }
 
+   console.log('render');
+
    const items = renderItems(charList);
    const errorMessage = error ? <ErrorMessage /> : null;
    const spinner = loading && !newItemLoading ? <Spinner /> : null;
