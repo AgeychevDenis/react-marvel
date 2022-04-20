@@ -5,7 +5,7 @@ import useMarvelService from '../../services/marvel-service';
 import Spinner from '../spinner/spinner';
 import ErrorMessage from '../error-message/error-message';
 
-import './single-comics-page.scss';
+import './single-comic-page.scss';
 
 const SingleComicPage = () => {
    const { comicId } = useParams();
