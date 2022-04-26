@@ -1,14 +1,14 @@
-import Decoration from '../../assets/img/info/Decoration.png';
 import { useState, useEffect } from 'react';
+import Decoration from '../../assets/img/info/Decoration.png';
+
 import useMarvelService from '../../services/marvel-service';
-import ErrorMessage from '../error-message/error-message';
-import Spinner from '../spinner/spinner';
+import setContent from '../../utils/setContent';
 import './info.scss';
 
 const Info = () => {
    const [char, setChar] = useState({});
 
-   const { loading, error, getCharacter, clearError } = useMarvelService();
+   const { getCharacter, clearError, process, setProcess } = useMarvelService();
 
    useEffect(() => {
       updateChar()
@@ -22,21 +22,16 @@ const Info = () => {
       clearError();
       const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
       getCharacter(id)
-         .then(onCharLoaded);
+         .then(onCharLoaded)
+         .then(() => setProcess('confirmed'));
    }
-
-   const errorMessage = error ? <ErrorMessage /> : null;
-   const spinner = loading ? <Spinner /> : null;
-   const content = !(loading || error) ? <View char={char} /> : null;
 
    return (
       <div className='info' >
          <div className="container">
             <div className="info__page">
                <div className="info__block block-info">
-                  {errorMessage}
-                  {spinner}
-                  {content}
+                  {setContent(process, View, char)}
                </div>
                <div className="info__block block-info">
                   <div className="block-info__wrapper">
@@ -57,8 +52,8 @@ const Info = () => {
    )
 }
 
-const View = ({ char }) => {
-   const { name, description, thumbnail, homepage, wiki } = char;
+const View = ({ data }) => {
+   const { name, description, thumbnail, homepage, wiki } = data;
    let imgSlyle = { 'objectFit': 'cover' }
    const imgUrl = "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg";
    if (thumbnail === imgUrl) {
