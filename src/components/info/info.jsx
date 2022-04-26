@@ -77,7 +77,7 @@ const View = ({ char }) => {
             </p>
             <div className="block-info__buttons">
                <a href={homepage} className="block-info__link btn">HOMEPAGE</a>
-               <a href={wiki} className="block-info__link btn">WIKI</a>
+               <a href={wiki} className="block-info__link btn btn-gray">WIKI</a>
             </div>
          </div>
       </>

@@ -8,6 +8,8 @@ import './comics-list.scss';
 
 const ComicsList = () => {
 
+   console.log('render');
+
    const [comicsList, setComicsList] = useState([]);
    const [newItemLoading, setnewItemLoading] = useState(false);
    const [offset, setOffset] = useState(0);

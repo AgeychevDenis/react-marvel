@@ -6,6 +6,7 @@ import CardsAside from '../cards-aside/cards-aside';
 import ErrorBoundary from '../error-boundary/error-boundary';
 
 import ImgBg from '../../assets/img/bg/bg.png'
+import CharSearchForm from '../char-search-from/char-search-form';
 
 const MainPage = () => {
 
@@ -26,9 +27,14 @@ const MainPage = () => {
                   <ErrorBoundary>
                      <ProductCards onCharSelected={onCharSelected} />
                   </ErrorBoundary>
-                  <ErrorBoundary>
-                     <CardsAside charId={selectedChar} />
-                  </ErrorBoundary>
+                  <div>
+                     <ErrorBoundary>
+                        <CardsAside charId={selectedChar} />
+                     </ErrorBoundary>
+                     <ErrorBoundary>
+                        <CharSearchForm />
+                     </ErrorBoundary>
+                  </div>
                </div>
             </div >
          </div >
