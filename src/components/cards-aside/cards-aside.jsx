@@ -9,7 +9,7 @@ import './cards-aside.scss'
 const CardsAside = (props) => {
    const [char, setChar] = useState(null);
 
-   const { loading, error, getCharacter, clearError, process, setProcess } = useMarvelService();
+   const { getCharacter, clearError, process, setProcess } = useMarvelService();
 
    useEffect(() => {
       updateChar()
@@ -30,8 +30,6 @@ const CardsAside = (props) => {
    const onCharLoaded = (char) => {
       setChar(char);
    }
-
-
 
    return (
       <div className="cards-aside">
