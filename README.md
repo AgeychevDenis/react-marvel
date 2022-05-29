@@ -1,3 +1,3 @@
 # **Marvel** :clapper
 
-### :earth_asia: [Сайт проекта "Marvel"](https://react-marvel-zeta.vercel.app/)
+### :earth_asia: [Учебный проекта "Marvel - герои комикса"](https://react-marvel-zeta.vercel.app/)
